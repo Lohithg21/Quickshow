@@ -14,7 +14,6 @@ import path from "path";
 import { fileURLToPath } from "url";
 
 const app = express();
-const port = process.env.PORT || 3000;
 
 await connectDB();
 
@@ -57,6 +56,8 @@ if (process.env.NODE_ENV === "production") {
     res.sendFile(path.join(clientPath, "index.html"));
   });
 }
+
+const port = process.env.PORT || 3000;
 
 app.listen(port, () =>
   console.log(`✅ Server running on port ${port}`)
