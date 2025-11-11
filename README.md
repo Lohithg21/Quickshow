@@ -31,30 +31,6 @@ Built using **React.js**, **Node.js**, **Express**, and **MongoDB**, with **Cler
 
 ---
 
-## Project Architecture
-
-QuickShow-main/
-│
-├── frontend/ # React + Vite app
-│ ├── src/
-│ │ ├── components/ # Reusable UI components
-│ │ ├── pages/ # App pages (Home, Movies, Bookings, Admin)
-│ │ ├── context/ # Global App Context (Auth, Movies, etc.)
-│ │ └── App.jsx
-│ └── package.json
-│
-├── server/ # Express backend
-│ ├── controllers/ # Logic for API endpoints
-│ ├── models/ # Mongoose schemas (Movie, Show, Booking)
-│ ├── middleware/ # Clerk & admin authentication
-│ ├── routes/ # Express routes (user, admin, show)
-│ ├── server.js # Entry point
-│ ├── .env # Environment variables
-│ └── package.json
-│
-└── README.md
-
----
 
 Future Improvements
 
