@@ -47,6 +47,16 @@ app.use("/api/admin", adminRouter);
 app.use("/api/user", userRouter);
 app.use("/api/inngest", serve({ client: inngest, functions }));
 
+if (process.env.NODE_ENV === "production") {
+  const clientPath = path.resolve(__dirname, "../client/dist");
+  app.use(express.static(clientPath));
+
+  // must be last
+  app.get("*", (req, res) => {
+    res.sendFile(path.join(clientPath, "index.html"));
+  });
+}
+
 // --- React frontend serving (must be LAST) ---
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
