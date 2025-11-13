@@ -3,23 +3,32 @@ import MovieCard from "../components/MovieCard";
 import BlurCircle from "../components/BlurCircle";
 
 const Movies = () => {
-  const [movies, setMovies] = useState([]); // always an array
+  const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
+  const API_BASE = import.meta.env.VITE_BASE_URL;   // ✅ Brave-safe URL
 
   useEffect(() => {
     const fetchMovies = async () => {
       try {
-        const res = await fetch("http://localhost:3000/api/show/all");
+        const res = await fetch(`${API_BASE}/api/show/all`, {
+          mode: "cors",
+        });
+
         const data = await res.json();
-        console.log("API response:", data); // 🧩 check this in browser console
+        console.log("Movies API Response:", data);
 
         if (data.success && Array.isArray(data.movies)) {
           setMovies(data.movies);
         } else if (data.success && Array.isArray(data.shows)) {
-          setMovies(data.shows.map(show => show.movie).filter(Boolean));
+          setMovies(
+            data.shows
+              .map((show) => show.movie)
+              .filter(Boolean)
+          );
         } else {
-          setMovies([]); // fallback
+          setMovies([]);
         }
       } catch (err) {
         console.error("Error fetching movies:", err);
