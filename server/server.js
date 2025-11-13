@@ -65,7 +65,7 @@ if (process.env.NODE_ENV === "production") {
   const clientPath = path.resolve(__dirname, "../client/dist");
 
   app.use(express.static(clientPath));
-
+}
   // Catch-all for React Router
   // Must be after all /api routes
   app.get("*", (req, res) => {
