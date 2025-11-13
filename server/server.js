@@ -57,10 +57,14 @@ if (process.env.NODE_ENV === "production") {
   app.use(express.static(clientPath));
 
   // Catch-all for React Router
+  // Must be after all /api routes
   app.get("*", (req, res) => {
-    res.sendFile(path.join(clientPath, "index.html"));
-  });
-}
+  if (req.path.startsWith("/api")) {
+    return res.status(404).json({ success: false, message: "API route not found" });
+  }
+  res.sendFile(path.join(clientPath, "index.html"));
+});
+
 
 // Start server
 app.listen(port, "0.0.0.0", () => {
